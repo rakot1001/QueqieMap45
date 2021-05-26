@@ -1,15 +1,23 @@
 "use strict";
 
-const mySymbol = Symbol();
-const obj = {
-  test: "test",
-  mySymbol: true,
+const vocabulary = new Map();
+vocabulary.set("cat", "кот");
+vocabulary.set("dog", "собака");
+vocabulary.set("table", "стол");
+vocabulary.set("structure", "структура");
+vocabulary.set("count", "считать");
+vocabulary.set("kernel", "ядро");
+
+const userInput = "Cat dog Set kernel structure count";
+
+const translate = (str) => {
+return str.toLowerCase().split(" ").map((word) => {
+    if(vocabulary.has(word)){
+      return vocabulary.get(word);
+    }
+    return word;
+    
+  })
+  .join(" ");
+  
 };
-
-const myMap = new Map();
-myMap.set(1,{});
-myMap.set('1',true);
-myMap.set(1,1000);
-myMap.get(1);
-
-myMap.set(obj, 'Sup imp value');
