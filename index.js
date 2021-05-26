@@ -11,13 +11,9 @@ vocabulary.set("kernel", "ядро");
 const userInput = "Cat dog Set kernel structure count";
 
 const translate = (str) => {
-return str.toLowerCase().split(" ").map((word) => {
-    if(vocabulary.has(word)){
-      return vocabulary.get(word);
-    }
-    return word;
-    
-  })
-  .join(" ");
-  
+  return str
+    .toLowerCase()
+    .split(" ")
+    .map((word) => (vocabulary.has(word) ? vocabulary.get(word) : word))
+    .join(" ");
 };
