@@ -66,9 +66,8 @@ const checkSequence = (str, options) => {
     } // В стеке лежат окрывающищиеся скобки. Стек НЕ пуст
     // Текущий обрабатываемый элемент должен быть закр скобкой того же типа
     //В стеке всегда лежат окрыв скобки. Ключи в brace тоже открывающиеся скобки
-    const lastItemFromStack = stack.pick(); // Взяли открывающюю
-    const correctClosedBrace = braces[lastItemFromStack];
-    if (symbol === correctClosedBrace) {
+   // Взяли открывающюю
+    if (symbol === braces[stack.pick()]) {
       // Определяет закрывающююся скобку и ее тип. Удаляет из стека
       stack.pop();
     } else if(braces[symbol]||closeBraces.includes(symbol)) {
