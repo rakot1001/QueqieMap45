@@ -18,7 +18,7 @@ class Stack {
 
   push(value) {
     if (this.size >= this._maxSize) {
-      throw new RangeError('Stack overflow');
+      throw new RangeError("Stack overflow");
     }
     this[`_${this.size}`] = value;
     this._size++;
@@ -42,31 +42,37 @@ class Stack {
 
 const newStack = new Stack(5, 12, 13, 14, 15);
 
-const options ={
-  braces:{
-    '(': ')',
-    '{': '}',
+const options = {
+  braces: {
+    "(": ")",
+    "{": "}",
   },
-  isStrict:false,
-}
+  isStrict: false,
+};
 
-const checkSequence = (str,options) => {
+const checkSequence = (str, options) => {
   const stack = new Stack();
-  const braces =  options.braces;
+  const braces = options.braces;
+  const closeBraces = Obbject.values(braces);
 
   for (const symbol of str) {
-    if(braces[symbol]){//Определить окрывающийся стек, запушить в стек
-        stack.push(symbol);
+    if (braces[symbol]) {
+      //Определить окрывающийся стек, запушить в стек
+      stack.push(symbol);
     }
-    if(stack.isEmpty){// Определить, пуст ли стек. Вернуть false
-        return false; 
-    }// В стеке лежат окрывающищиеся скобки. Стек НЕ пуст
+    if (closeBraces.includes(symbol) && stack.isEmpty) {
+      // Определить, пуст ли стек. Вернуть false
+      return false;
+    } // В стеке лежат окрывающищиеся скобки. Стек НЕ пуст
     // Текущий обрабатываемый элемент должен быть закр скобкой того же типа
     //В стеке всегда лежат окрыв скобки. Ключи в brace тоже открывающиеся скобки
-    const lastItemFromStack = stack.pick();// Взяли открывающюю
+    const lastItemFromStack = stack.pick(); // Взяли открывающюю
     const correctClosedBrace = braces[lastItemFromStack];
-    if(symbol === correctClosedBrace){// Определяет закрывающююся скобку и ее тип. Удаляет из стека
-        stack.pop();
+    if (symbol === correctClosedBrace) {
+      // Определяет закрывающююся скобку и ее тип. Удаляет из стека
+      stack.pop();
+    } else if(braces[symbol]||closeBraces.includes(symbol)) {
+      return false;
     }
   }
 
