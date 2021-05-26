@@ -17,3 +17,22 @@ const translate = (str) => {
     .map((word) => (vocabulary.has(word) ? vocabulary.get(word) : word))
     .join(" ");
 };
+const user1 = {
+  id: 1,
+  name: "John",
+  age: 24,
+};
+const user2 = {
+  id: 2,
+  name: "Jane",
+  age: 20,
+};
+
+const jM = ["aaaaaa", "bbbbbbbb", "zzzzzzzzzz"];
+const jaM = ["saaaaaa", "sbbbbbb", "szzzzzzzzzz"];
+
+const msgToouser = new Map();
+msgToouser.set(user1, jM);
+msgToouser.set(user2 ,jaM);
+
+const getUserMsg = (u) => msgToouser.get(u);
