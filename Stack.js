@@ -42,10 +42,32 @@ class Stack {
 
 const newStack = new Stack(5, 12, 13, 14, 15);
 
-const checkSequence = (str) => {
+const options ={
+  braces:{
+    '(': ')',
+    '{': '}',
+  },
+  isStrict:false,
+}
+
+const checkSequence = (str,options) => {
   const stack = new Stack();
+  const braces =  options.braces;
 
   for (const symbol of str) {
+    if(braces[symbol]){//Определить окрывающийся стек, запушить в стек
+        stack.push(symbol);
+    }
+    if(stack.isEmpty){// Определить, пуст ли стек. Вернуть false
+        return false; 
+    }// В стеке лежат окрывающищиеся скобки. Стек НЕ пуст
+    // Текущий обрабатываемый элемент должен быть закр скобкой того же типа
+    //В стеке всегда лежат окрыв скобки. Ключи в brace тоже открывающиеся скобки
+    const lastItemFromStack = stack.pick();// Взяли открывающюю
+    const correctClosedBrace = braces[lastItemFromStack];
+    if(symbol === correctClosedBrace){// Определяет закрывающююся скобку и ее тип. Удаляет из стека
+        stack.pop();
+    }
   }
 
   return stack.isEmpty;
